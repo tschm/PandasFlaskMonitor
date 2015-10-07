@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            pyt.frame_table();
+        });
+    </script>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ frame | safe}}
+        </div>
+    </div>
+{% endblock %}
