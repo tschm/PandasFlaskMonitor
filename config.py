@@ -1,4 +1,8 @@
-SECRET_KEY = "UY18980yn88921"
-TABLE_FORMAT = " table table-striped table-bordered "
-DEBUG = False
-TESTING = False
+bind = "0.0.0.0:5000"
+loglevel = "INFO"
+workers = "4"
+worker_class = "gevent"
+reload = True
+
+errorlog = "-"
+accesslog = "-"

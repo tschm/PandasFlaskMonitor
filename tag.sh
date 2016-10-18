@@ -1,4 +1,3 @@
-#!/bin/bash
-VERSION=v6.0
-git tag -a ${VERSION} -m 'version ${VERSION}'
+#!/usr/bin/env bash
+git tag -a $(./setup.py --version) -m "new tag"
 git push --tags

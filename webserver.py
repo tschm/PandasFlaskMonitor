@@ -1,17 +1,12 @@
 #!./env/bin/python
-import os
+import pandas as pd
 from flask import Flask
 from web.web import Webserver
 
 app = Flask(__name__)
-here = os.path.dirname(__file__)
-
-if not "MONITOR_SETTINGS" in os.environ:
-    os.environ["MONITOR_SETTINGS"] = os.path.join(here, "config.py")
-
-app.config.from_envvar("MONITOR_SETTINGS")
+app.config.from_envvar("WEBSERVER_SETTINGS")
 webserver = Webserver(table_format=app.config["TABLE_FORMAT"])
-
+webserver.archive = pd.DataFrame(index=[0,1],columns=["A","B"])
 
 @app.route('/')
 @app.route('/index')
@@ -26,3 +21,6 @@ def framex(name):
 def frame():
     return webserver.frame()
 
+if __name__ == "__main__":
+    app.logger.info("Main")
+    app.run()

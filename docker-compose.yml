@@ -1,0 +1,13 @@
+version: '2'
+services:
+  pymonitor:
+     build:
+       context: .
+       dockerfile: Dockerfile
+
+     expose:
+        - "5000"
+     volumes:
+        - .:/pymonitor
+
+     command: gunicorn --config config.py webserver:app
