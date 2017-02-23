@@ -1,18 +1,13 @@
 import unittest
-import os
-import pandas as pd
-import numpy as np
 
-here = os.path.dirname(__file__)
-os.environ["MONITOR_SETTINGS"] = os.path.join(here, "config.py")
 
-from webserver import app, webserver
-webserver.archive = pd.DataFrame(data=np.random.randn(3,10),index=["A","B","C"])
 
+from web.app import app
+from test.config import Config
 
 class FlaskTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = app
+        self.app = app(Config)
         self.app = self.app.test_client()
 
     def tearDown(self):

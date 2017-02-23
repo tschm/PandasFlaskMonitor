@@ -4,13 +4,14 @@ FROM continuumio/miniconda3
 # File Author / Maintainer
 MAINTAINER Thomas Schmelzer "thomas.schmelzer@gmail.com"
 
-RUN conda install -q -y pandas=0.18.1 flask=0.10.1
+RUN conda install -q -y pandas flask
 
-RUN pip install gunicorn gevent
+RUN pip install waitress
+
+EXPOSE 8000
 
 ADD . /pymonitor
 
 WORKDIR /pymonitor
 
-ENV WEBSERVER_SETTINGS /pymonitor/config/config.py
-
+CMD python /pymonitor/start.py

@@ -5,6 +5,4 @@ services:
        context: .
        dockerfile: Dockerfile-Test
     command: nosetests
-    environment:
-     - WEBSERVER_SETTINGS=/pymonitor/test/config.py
 
