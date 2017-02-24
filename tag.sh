@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-git tag -a "7.0.0" -m "new tag"
+git tag -a "v0.2" -m "new tag"
 git push --tags
