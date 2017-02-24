@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-docker-compose build
-docker-compose run -p "2004:8000" -d pymonitor
+docker build --tag=pdmonitor .
+docker run -p 2058:8000 -v $(pwd)/frames/b:/frames:ro pdmonitor:latest

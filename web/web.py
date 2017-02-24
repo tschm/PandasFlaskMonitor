@@ -1,39 +1,21 @@
-from flask import render_template, url_for
+import logging
+from flask import render_template
 import pandas as pd
 
 
 class Webserver(object):
-    def __init__(self, table_format):
+    def __init__(self, table_format, frame, logger=None):
         self.__format = table_format
+        self.__frame = frame
+        self.__logger = logger or logging.getLogger(__name__)
 
     def __f2html(self, frame, name, tableformat):
         return frame.to_html(classes="{0} {1}".format(name, tableformat),
                              float_format=lambda x: '{0:.2f}'.format(x) if pd.notnull(x) else '-',
                              escape=False)
 
-    def __link(self, endpoint, values):
-        rows = [(url_for(endpoint=endpoint, _external=True, **v[1]), v[0]) for v in values]
-        return ['<a href={0}>{1}</a>'.format(row[0], row[1]) for row in rows]
-
-    @property
-    def archive(self):
-        return self.__frame
-
-    @archive.setter
-    def archive(self, value):
-        self.__frame = value
-
-
-    def framex(self, name):
-        return render_template("frame.html", frame=self.__f2html(pd.DataFrame(self.__frame.ix[name]), name="frame", tableformat=self.__format))
-
     def frame(self):
-        frame = self.__frame.copy()
-        values = [(name, {"name": name}) for name in frame.index]
-        frame.index = self.__link("framex", values)
+        self.__logger.debug(self.__frame)
+        return render_template("frame.html", frame=self.__f2html(self.__frame.copy(), name="frame", tableformat=self.__format))
 
-        return render_template("frame.html", frame=self.__f2html(frame, name="frame", tableformat=self.__format))
-
-    def index(self):
-        return render_template("index.html")
 
