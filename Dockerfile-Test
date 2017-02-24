@@ -6,9 +6,10 @@ MAINTAINER Thomas Schmelzer "thomas.schmelzer@gmail.com"
 
 RUN conda install -q -y pandas flask nose
 
-RUN pip install waitress
-
-ADD . /pymonitor
+ADD ./config     /pymonitor/config
+ADD ./static     /pymonitor/static
+ADD ./templates  /pymonitor/templates
+ADD ./web        /pymonitor/web
 
 WORKDIR /pymonitor
 
