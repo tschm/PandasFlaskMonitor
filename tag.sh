@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-git commit pu
-git tag -a v0.4 -m "new tag"
+git tag -a v0.5 -m "new tag"
 git push --tags
