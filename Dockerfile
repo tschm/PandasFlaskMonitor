@@ -12,8 +12,6 @@ EXPOSE 8000
 
 ADD ./start.py   /pymonitor/start.py
 ADD ./config     /pymonitor/config
-ADD ./static     /pymonitor/static
-ADD ./templates  /pymonitor/templates
 ADD ./web        /pymonitor/web
 
 WORKDIR /pymonitor
